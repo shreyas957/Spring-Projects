@@ -1,0 +1,56 @@
+<configuration>
+    <appender name="MyConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--         below pattern explanation :
+                    %d{HH:mm:ss.SSS}: This represents the date and time when the log message was generated.
+            HH: Hour of the day in 24-hour format (00-23).
+            mm: Minute of the hour (00-59).
+            ss: Second of the minute (00-59).
+            SSS: Millisecond of the second (000-999).
+            [%thread]: This outputs the name of the thread that generated the log message, enclosed in square brackets.
+            %-5level: This represents the log level of the message (e.g., TRACE, DEBUG, INFO, WARN, ERROR).
+            -5: This ensures that the log level is left-justified and padded to a width of 5 characters.
+            %logger{36}: This outputs the name of the logger that generated the log message.
+            {36}: This limits the logger name to 36 characters. If the logger name is longer, it will be truncated from the beginning.
+            -: This is a literal dash used to separate the logger name from the log message.
+            %msg: This outputs the actual log message.
+            %n: This outputs a platform-dependent newline character, ensuring that each log message appears on a new line.
+
+             -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    The below appender is basic one which continuously append to the same file -->
+    <appender name="MyFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>
+            <fileName>logFile.log</fileName>
+        </file>
+    </appender>
+
+    <!--    Below appender is the one which rolls the file based on size and time-->
+    <appender name="myRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>
+            <fileName>logging/logging.log</fileName>
+        </file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">  <!-- This is the policy to roll the file based on size and time -->
+            <maxFileSize>1MB</maxFileSize> <!-- This is the maximum size of the file -->
+            <maxHistory>30</maxHistory> <!-- This is the maximum number of files to keep -->
+            <fileNamePattern>logFile.%d{yyyy-MM-dd}.%i.log</fileNamePattern>   <!-- %i means index of file-->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="MyConsoleAppender"/>
+    </root>
+
+    <!--    set logging level of package com.shreyas.logging-->
+    <logger name="com.shreyas.logging" level="TRACE">
+        <appender-ref ref="MyConsoleAppender"/>
+    </logger>
+
+</configuration>

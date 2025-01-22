@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: logging
+
+#logging:
+#  level:
+##    root: trace
+#    # For a specific package/class
+#    com:
+#      shreyas:
+#        logging:
+#          controller: debug
+#          com.shreyas.logging.LearnLogging: TRACE
