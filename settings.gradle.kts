@@ -1,8 +1,4 @@
 rootProject.name = "Spring-Projects"
-include("logging")
-include("intro-spring")
-include("spring-web")
-include("spring-annotations")
 
 pluginManagement {
     repositories {
@@ -11,4 +7,9 @@ pluginManagement {
     }
 }
 
+include("logging")
+include("intro-spring")
+include("spring-web")
+include("spring-annotations")
 include("spring-aop")
+include("spring-transaction-management")
