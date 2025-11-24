@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import java.util.concurrent.Future;
+
 @SpringBootApplication
 @EnableAsync
 public class AsyncDemoMain {
@@ -19,6 +21,11 @@ public class AsyncDemoMain {
             System.out.println("commandLineRunner: " + Thread.currentThread().getName());
             userService.asyncMethod();
             userService.asyncMethod2();
+
+            Future<String> stringFuture = userService.asyncMethod3();
+            System.out.println(stringFuture.get());
+
+            userService.asyncMethod4();
         };
     }
 }
